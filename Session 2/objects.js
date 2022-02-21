@@ -35,3 +35,37 @@ hobbies.push('Programming')
 console.log(hobbies);
 //You can change the constant because arrays are reference type, and the only store a pointer to the element in memory
 //The structure of array changed, but not it`s reference
+
+
+//==================
+// SPREAD OPERATOR
+//==================
+//Slice just copy the array
+// const copiedArray = hobbies.slice();
+const copiedArray = [...hobbies];   //Spread operator will return all array elements with their properties
+//The copied is not a copy of the original array, it will create a new array in memory
+console.log(copiedArray)
+
+const copiedPerson = {...person};
+console.log(copiedPerson);
+
+
+//==================
+// REST OPERATOR
+//==================
+//Rest operator is the opposite of spread
+// const toArray = (arg1, arg2, arg3) => {
+//     return [arg1, arg2, arg3];
+// };
+// console.log(toArray(1, 2, 3))
+// console.log(toArray(1, 2, 3, 4))    //Will return an error, because function only allows 3 arguments
+
+
+const toArray = (...args) => {
+    return args;
+};
+console.log(toArray(1, 2, 3))
+console.log(toArray(1, 2, 3, 4))    //Will return an error, because function only allows 3 arguments
+//The syntax is the same as spread... JS will understand if you are pulling elements out of an array or 
+//merging multiple elements into an array
+//**REST operator should be used only as arguments in the function**
