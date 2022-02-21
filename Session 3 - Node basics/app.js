@@ -6,10 +6,15 @@ const http = require('http');
 // http.createServer(rqListener);
 
 const server = http.createServer((request, response) => {
-    console.log(request.url);
-    console.log(request.method);
-    console.log(request.headers);
-    // process.exit(); //This will abort node execution
+    const url = request.url;
+
+    if(url === '/') {
+        response.write('<html>');
+        response.write('<head><title>Enter Message</title></head>');
+        response.write('<body><form action="/message" method="POST"><input type="text" /><button>Send</button></form></body>');
+        response.write('</html>');
+        return response.end();  //Return will make sure the code stops here
+    }
 
     response.setHeader('Content-Type', 'text-html');
     response.write('<html>');
@@ -17,6 +22,7 @@ const server = http.createServer((request, response) => {
     response.write('<body><h1>First Page</h1></body>');
     response.write('</html>');
     response.end();
+    
 });
 
 server.listen(3000);
