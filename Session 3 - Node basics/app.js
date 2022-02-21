@@ -6,7 +6,9 @@ const http = require('http');
 // http.createServer(rqListener);
 
 const server = http.createServer((request, response) => {
-    console.log(request);
+    console.log(request.url);
+    console.log(request.method);
+    console.log(request.headers);
     // process.exit(); //This will abort node execution
 });
 
