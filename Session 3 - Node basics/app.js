@@ -1,12 +1,9 @@
 const http = require('http');
-
-//One way to do it is creating the function to handle requests and responses
-// function rqListener(request, response){
-// }
-// http.createServer(rqListener);
+const fs = require('fs');
 
 const server = http.createServer((request, response) => {
     const url = request.url;
+    const method = request.method;
 
     if(url === '/') {
         response.write('<html>');
@@ -14,6 +11,14 @@ const server = http.createServer((request, response) => {
         response.write('<body><form action="/message" method="POST"><input type="text" /><button>Send</button></form></body>');
         response.write('</html>');
         return response.end();  //Return will make sure the code stops here
+    }
+
+    if(url === '/message' && method === 'POST') {
+        fs.writeFileSync('message.txt', 'DUMMY');
+        // response.writeHead(302, {});
+        response.statusCode = 302;
+        response.setHeader('Location', '/')
+        return response.end();
     }
 
     response.setHeader('Content-Type', 'text-html');
