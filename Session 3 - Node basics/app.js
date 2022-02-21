@@ -8,14 +8,25 @@ const server = http.createServer((request, response) => {
     if(url === '/') {
         response.write('<html>');
         response.write('<head><title>Enter Message</title></head>');
-        response.write('<body><form action="/message" method="POST"><input type="text" /><button>Send</button></form></body>');
+        response.write('<body><form action="/message" method="POST"><input type="text" name="message" /><button>Send</button></form></body>');
         response.write('</html>');
         return response.end();  //Return will make sure the code stops here
     }
 
     if(url === '/message' && method === 'POST') {
-        fs.writeFileSync('message.txt', 'DUMMY');
-        // response.writeHead(302, {});
+        const body = [];
+
+        request.on('data', (chunk) => {
+            console.log(chunk);
+            body.push(chunk);
+        })
+
+        request.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            const message = parsedBody.split('=')[1];
+            fs.writeFileSync('message.txt', message);
+        })
+
         response.statusCode = 302;
         response.setHeader('Location', '/')
         return response.end();
