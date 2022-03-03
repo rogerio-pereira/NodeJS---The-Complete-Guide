@@ -1,4 +1,4 @@
-const http = require('http');
+// const http = require('http'); // This line can be removed because we`re not using http anymore, we`re using express
 const express = require('express');
 
 const app = express();
@@ -11,10 +11,10 @@ app.use((request, response, next) => {
 })
 app.use((request, response, next) => {
     console.log('In another the middleware!');
-    response.setHeader('');
     response.send('<h1>Hello from Express</h1>');
 })
 
-const server = http.createServer(app);
-
-server.listen(3000);
+// const server = http.createServer(app);
+// server.listen(3000);
+//This does the same as two lines above
+app.listen(3000);
