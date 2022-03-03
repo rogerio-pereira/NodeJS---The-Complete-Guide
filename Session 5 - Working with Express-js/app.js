@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));  //extended is required, so it will avoid a warning
 
 //Add Routes
-app.use(adminRoutes);
+app.use('/admin', adminRoutes); //This will add a prefix to route
 app.use(shopRoutes);
 
 //Middleware for Error pages
