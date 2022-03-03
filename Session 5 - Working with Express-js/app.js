@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({extended: false}));  //extended is required, so i
 app.use('/add-product', (request, response, next) => {
     response.send("<form action='/product' method='POST'><input type='text' name='title' /> <button type='submit' >Add Product</button></form>");
 });
-app.use('/product', (req, res, next) =>  {
+// app.use('/product', (req, res, next) =>  {   //Will enable this middleware for all requests
+// app.get('/product', (req, res, next) =>  {   //Will enable this middleware only for get requests
+app.post('/product', (req, res, next) =>  {     //Will enable this middleware only for post requests
     // console.log(req.body)
     console.log(req.body.title)
     res.redirect('/');
